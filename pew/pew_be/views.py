@@ -256,7 +256,7 @@ class ProductAPIView(APIView):
             context={"request": request}
         )
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(created_by=request.user)
             return Response(
                 {"message": "Product added", "data": serializer.data},
                 status=status.HTTP_201_CREATED
@@ -279,7 +279,7 @@ class ProductAPIView(APIView):
             context={"request": request}
         )
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(created_by=request.user)
             return Response(
                 {"message": "Product updated", "data": serializer.data}
             )
