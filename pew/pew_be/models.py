@@ -137,12 +137,6 @@ class Product(models.Model):
 
     reviews = models.IntegerField(default=0)
 
-    storage = models.CharField(max_length=50, blank=True, null=True)
-
-    mount_type = models.CharField(max_length=50, blank=True, null=True)
-
-    stage = models.CharField(max_length=50, blank=True, null=True)
-
     badge = models.CharField(max_length=50, blank=True, null=True)
 
     technology = models.TextField(blank=True, null=True)
