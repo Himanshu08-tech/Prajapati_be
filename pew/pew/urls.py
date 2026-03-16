@@ -16,18 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pew_be.views import AdminLoginAPIView, AdminRegisterAPIView, AdminLogoutAPIView
-
+from pew_be.views import AdminLoginAPIView, AdminRegisterAPIView, AdminLogoutAPIView, ProductAPIView
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("admin/login/", AdminLoginAPIView.as_view(), name="admin-login"),
+    path("api/admin/login/", AdminLoginAPIView.as_view(), name="admin-login"),
 
-    path("admin/logout/", AdminLogoutAPIView.as_view(), name="admin-logout"),
+    path("api/admin/logout/", AdminLogoutAPIView.as_view(), name="admin-logout"),
 
-    path("admin/register/", AdminRegisterAPIView.as_view(), name="admin-register"),
+    path("api/admin/register/", AdminRegisterAPIView.as_view(), name="admin-register"),
 
-    path("admins/", AdminRegisterAPIView.as_view(), name="admin-list"),
+    path("api/admins/", AdminRegisterAPIView.as_view(), name="admin-list"),
 
-    path("admins/<int:pk>/", AdminRegisterAPIView.as_view(), name="admin-detail"),
+    path("api/admins/<int:pk>/", AdminRegisterAPIView.as_view(), name="admin-detail"),
 
+    path("api/products/", ProductAPIView.as_view(), name="product-list"),
+
+    path("api/products/<int:pk>/", ProductAPIView.as_view(), name="product-detail"),
 ]
+# =========================
+# MEDIA FILES (SAFE)
+# =========================
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
